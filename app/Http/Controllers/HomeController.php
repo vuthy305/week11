@@ -29,7 +29,8 @@ class HomeController extends Controller
     }
     public function category()
     {
-        return view('categories.category');
+        $category = Category::all();
+        return view('categories.category',['category'=>$category]);
     }
     public function post()
     {
