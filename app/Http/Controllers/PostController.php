@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -26,9 +27,11 @@ class PostController extends Controller
 
         return redirect(route('post'));
     }
-    public function edit($id){
+    public function edit(Post $post){
+        $this->authorize('update', $post);
+
         $category = Category::all();
-        $data = Post::findOrFail($id);
+        $data = Post::findOrFail($post->id);
         if($data){
             return view('posts.edit',['data'=>$data,'category'=>$category]);
         }
@@ -36,8 +39,9 @@ class PostController extends Controller
             return [404];
         }
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
         $request->validate(
             [
                 'title'=>'required|unique:posts',
@@ -47,7 +51,7 @@ class PostController extends Controller
             ]
         );
  
-        $post = Post::findorFail($id);
+        $post = Post::findorFail($post->id);
 
         if($post){
             $post->title = $request->title;
@@ -66,8 +70,9 @@ class PostController extends Controller
             return [404];
         }
     }
-    public function delete($id){
-        $data = Post::find($id);
+    public function delete(Post $post){
+        $this->authorize('delete', $post);
+        $data = Post::find($post->id);
         if($data){
             return view('posts.delete',['data'=>$data]);
         }
@@ -75,8 +80,9 @@ class PostController extends Controller
             return ['404'];
         }
     }
-    public function destroy($id){
-        $result = Post::destroy($id);
+    public function destroy(Post $post){
+        $this->authorize('delete', $post);
+        $result = Post::destroy($post->id);
         if($result){
             return redirect(route('post'));
         }

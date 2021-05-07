@@ -26,7 +26,14 @@
                 <td>{{$post->description}}</td>
                 <td>{{$post->category}}</td>
                 <td>{{$post->user_email}}</td>
-                <td><a href="/post/edit/{{$post->id}}" type="button" class="btn btn-primary">Edit</a><a href="/post/delete/{{$post->id}}" type="button" class="btn btn-danger">Delete</a></td>
+                <td>
+                  @can('update',$post)
+                  <a href="/post/edit/{{$post->id}}" type="button" class="btn btn-primary">Edit</a>
+                  @endcan
+                  @can('delete', $post)
+                  <a href="/post/delete/{{$post->id}}" type="button" class="btn btn-danger">Delete</a>
+                  @endcan
+                </td>
               </tr>
               @endforeach
             </tbody>
