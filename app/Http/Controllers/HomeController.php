@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,8 @@ class HomeController extends Controller
     }
     public function post()
     {
-        return view('posts.post');
+        $posts = Post::paginate(10);
+        return view('posts.post',['posts'=>$posts]);
     }
     public function create()
     {

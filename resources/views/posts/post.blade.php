@@ -19,16 +19,21 @@
               </tr>
             </thead>
             <tbody>
+              @foreach ($posts as $post)
               <tr>
-                <th scope="row">1</th>
-                <td>This is me</td>
-                <td>This is me This is me This is meThis is meThis is meThis is meThis is meThis is meThis is me meThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is memeThis is meThis is me </td>
-                <td>Sports</td>
-                <td>Visal</td>
-                <td><a href="" type="button" class="btn btn-primary">Edit</a><a href="" type="button" class="btn btn-danger">Delete</a></td>
+                <th scope="row">{{$post->id}}</th>
+                <td>{{$post->title}}</td>
+                <td>{{$post->description}}</td>
+                <td>{{$post->category}}</td>
+                <td>{{$post->user_email}}</td>
+                <td><a href="/post/edit/{{$post->id}}" type="button" class="btn btn-primary">Edit</a><a href="/post/delete/{{$post->id}}" type="button" class="btn btn-danger">Delete</a></td>
               </tr>
+              @endforeach
             </tbody>
           </table>
+      </div>
+      <div style="width:100%;display:flex;justify-content: center">
+        {{ $posts->links() }}
       </div>
 </div>
 @endsection

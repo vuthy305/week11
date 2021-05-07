@@ -16,8 +16,8 @@
           <small style="color: red">@error('description'){{$message}}@enderror</small>
       </div>
       <div class="form-group">
-        <label for="category_id">CategoryID</label>
-            <select class="form-control" id="category_id" name="category_id">
+        <label for="category">Category</label>
+            <select class="form-control" id="category" name="category">
                 <option value="None">None</option>
                 @foreach ($category as $item)
                     <option value="{{$item->categoryname}}">{{$item->categoryname}}</option> 
@@ -26,7 +26,7 @@
       </div>
       <div class="form-group">
           <label for="user_email">User Email</label>
-          <input type="email" class="form-control" id="user_email" name="user_email" value="{{Auth::user()->name}}" readonly>
+          <input type="email" class="form-control" id="user_email" name="user_email" value="{{Auth::user()->email}}" readonly>
           <small style="color: red">@error('user_email'){{$message}}@enderror</small>
       </div>
       <button type="submit" class="btn btn-primary">Upload</button>

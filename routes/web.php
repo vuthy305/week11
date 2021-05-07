@@ -24,3 +24,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/category',['App\Http\Controllers\HomeController','category'])->name('category');
 Route::get('/post',['App\Http\Controllers\HomeController','post'])->name('post');
 Route::get('/post/create',['App\Http\Controllers\HomeController','create'])->name('createpost');
+Route::get('/post/edit/{id}',['App\Http\Controllers\PostController','edit']);
+Route::get('/post/delete/{id}',['App\Http\Controllers\PostController','delete']);
+
+Route::post('/posts',['App\Http\Controllers\PostController','store']);
+
+Route::put('/posts/{id}',['App\Http\Controllers\PostController','update']);
+
+Route::delete('/posts/{id}',['App\Http\Controllers\PostController','destroy']);
+
